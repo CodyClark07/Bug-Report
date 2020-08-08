@@ -8,4 +8,12 @@ const bug = new Schema({
     closedDate: { type: Date },
     creatorEmail: { type: String, required: true }
 }, { timestamps: true, toJSON: { virtuals: true } })
+
+bug.virtual("creator",
+    {
+        localField: "creatorEmail",
+        ref: "Profile",
+        foreignField: "email",
+        justOne: true
+    })
 export default bug
