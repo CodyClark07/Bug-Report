@@ -22,6 +22,8 @@
       </div>
       <button class="btn btn-sm btn-outline-success mb-2" type="submit">Submit</button>
     </form>
+    <br />
+    <u>NOTES:</u>
     <notes v-for="note in notes" :noteData="note" :key="note.id" />
   </div>
 </template>
