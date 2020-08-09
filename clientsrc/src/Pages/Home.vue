@@ -1,16 +1,16 @@
 <template>
-  <div class="home">
+  <div class="home text-align-center">
     <button
       class="btn btn-sm btn-outline-warning mt-5 mb-2"
       @click="inputVisible = !inputVisible"
     >Report Bug</button>
 
-    <form v-if="inputVisible" @submit.prevent="addBug()">
+    <form v-if="inputVisible" @submit.prevent="addBug()" class="mb-5">
       <div class="form-group">
         <label for="title"></label>
         <input
           type="text"
-          class="form-control"
+          class="form-control w-25"
           id="title"
           placeholder="Enter Title Here..."
           v-model="newBug.title"
@@ -20,7 +20,7 @@
         <label for="description"></label>
         <input
           type="text"
-          class="form-control"
+          class="form-control w-50"
           id="description"
           placeholder="Enter Description Here..."
           v-model="newBug.description"

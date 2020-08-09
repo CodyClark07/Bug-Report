@@ -83,8 +83,8 @@ export default new Vuex.Store({
       }
     },
     async getNotes({ commit, dispatch }, bugId) {
+
       try {
-        debugger
         let res = await api.get("bugs/" + bugId + "/notes")
         commit("setNotes", res.data)
       } catch (error) {
@@ -96,6 +96,16 @@ export default new Vuex.Store({
         let res = await api.post("notes", note)
         console.log(res.data)
         dispatch("getNotes")
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async removeNote({ commit, dispatch }, payload) {
+      try {
+        let res = await api.delete("notes/" + payload.id)
+        console.log(res.data)
+        // commit("setNotes", res.data)
+        dispatch("getNotes", payload.bugId)
       } catch (error) {
         console.error(error);
       }

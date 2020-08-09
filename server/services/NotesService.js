@@ -23,8 +23,11 @@ class NotesService {
     async edit(id, userEmail, body) {
         return await dbContext.Notes.findByIdAndUpdate({ _id: id, creatorEmail: userEmail }, body, { new: true })
     }
-    async delete(id) {
-        let data = await dbContext.Notes.findByIdAndRemove({ _id: id })
+    async delete(id, userEmail) {
+        let data = await dbContext.Notes.findOneAndRemove({ _id: id, creatorEmail: userEmail });
+        if (!data) {
+            throw new BadRequest("Invalid ID or you did not create this bug")
+        }
     }
 
 }

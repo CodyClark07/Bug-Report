@@ -33,7 +33,6 @@ export class BugsController extends BaseController {
   }
   async getBugNotes(req, res, next) {
     try {
-
       let data = await notesService.getAll(req.params.id)
       console.log(data)
       return res.send(data)

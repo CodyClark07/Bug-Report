@@ -1,13 +1,13 @@
 <template>
-  <div class="bug">
-    <h2 class="text-capitalize">Title: {{bug.title}}</h2>
+  <div class="bug container">
+    <h2 class="text-capitalize text-center">Title: {{bug.title}}</h2>
     <span v-if="bug.closed==false" class="text-success">Status: open</span>
     <span v-else class="text-danger">Status: closed</span>
     <hr />
     <h4 class="text-capitalize">Description: {{bug.description}}</h4>
     <button class="btn btn-sm btn-outline-danger" @click="closeBug()">close bug</button>
     <hr />
-    <button class="btn btn-sm btn-outline-success" @click="noteVisible = !noteVisible">Add Note</button>
+    <button class="btn btn-sm btn-outline-success mb-2" @click="noteVisible = !noteVisible">Add Note</button>
 
     <form v-if="noteVisible" @submit.prevent="addNote()">
       <div class="form-group">
@@ -20,7 +20,7 @@
           v-model="newNote.comment"
         />
       </div>
-      <button class="btn btn-sm btn-outline-success" type="submit">Submit</button>
+      <button class="btn btn-sm btn-outline-success mb-2" type="submit">Submit</button>
     </form>
     <notes v-for="note in notes" :noteData="note" :key="note.id" />
   </div>
@@ -32,7 +32,6 @@ import Notes from "../components/Notes";
 export default {
   name: "bug",
   mounted() {
-    debugger;
     this.$store.dispatch("getBugById", this.$route.params.id);
     this.$store.dispatch("getNotes", this.$route.params.id);
   },
@@ -60,7 +59,6 @@ export default {
       });
     },
     addNote() {
-      debugger;
       this.$store.dispatch("addNote", {
         content: this.newNote.comment,
         creatorEmail: this.$auth.userInfo.email,

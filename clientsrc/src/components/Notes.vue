@@ -2,7 +2,7 @@
   <div class="notes">
     <h4 class="text-capitalize">
       {{noteData.content}}
-      <i class="fa fa-trash-o text-danger" @click="removeNote(noteData.id)"></i>
+      <i class="fa fa-trash-o text-danger" @click="removeNote(noteData)"></i>
     </h4>
   </div>
 </template>
@@ -16,7 +16,14 @@ export default {
     return {};
   },
   computed: {},
-  methods: {},
+  methods: {
+    removeNote(noteData) {
+      this.$store.dispatch("removeNote", {
+        id: this.noteData.id,
+        bugId: this.noteData.bugId,
+      });
+    },
+  },
   components: {},
 };
 </script>
