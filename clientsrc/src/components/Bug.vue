@@ -1,6 +1,13 @@
 <template>
   <tr class="Bugs" @click="openBug">
-    <td class="text-capitalize">{{bugData.title}}</td>
+    <td class="text-capitalize">
+      <i
+        v-if="this.$auth.userInfo.email = user.email"
+        class="fa fa-trash-o text-danger ml-2"
+        @click="removeBug(bugData)"
+      ></i>
+      {{bugData.title}}
+    </td>
     <td>{{bugData.creator.name}}</td>
     <td v-if="bugData.closed == false" class="text-success">{{this.status}}</td>
     <td v-else class="text-danger">{{this.status}}</td>
@@ -20,10 +27,21 @@ export default {
       updatedDate: new Date(this.bugData.updatedAt).toLocaleString(),
     };
   },
-  computed: {},
+  computed: {
+    user() {
+      return this.$store.state.profile;
+    },
+  },
   methods: {
     openBug() {
       this.$router.push({ name: "bug-info", params: { id: this.bugData.id } });
+    },
+    removeBug(bugData) {
+      debugger;
+      this.$store.dispatch("removeBug", {
+        bugId: this.bugData.id,
+        creatorEmail: this.bugData.creatorEmail,
+      });
     },
   },
   components: { BugInfo },

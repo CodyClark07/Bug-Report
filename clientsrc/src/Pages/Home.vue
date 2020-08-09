@@ -8,7 +8,7 @@
       v-if="inputVisible"
       id="buggy"
       src="https://i1.wp.com/freepngimages.com/wp-content/uploads/2017/06/stag-beetle-no-background.png?fit=769%2C913"
-      style="height:40px;width:40px"
+      style="height:60px;width:70px"
       class="img-fluid ml-2 mt-4"
     />
 
@@ -21,6 +21,7 @@
           id="title"
           placeholder="Enter Title Here..."
           v-model="newBug.title"
+          required
         />
       </div>
       <div class="form-group">
@@ -31,6 +32,7 @@
           id="description"
           placeholder="Enter Description Here..."
           v-model="newBug.description"
+          required
         />
       </div>
       <!-- <div class="form-group">
@@ -71,8 +73,6 @@ import Bugs from "../components/Bug";
 export default {
   name: "home",
   mounted() {
-    this.$store.dispatch("getProfile");
-
     this.$store.dispatch("getBugs");
   },
   data() {

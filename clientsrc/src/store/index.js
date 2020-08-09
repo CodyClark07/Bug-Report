@@ -83,6 +83,35 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async removeBug({ commit, dispatch }, payload) {
+      debugger
+      let result = await Swal.fire({
+        title: 'Are you sure you want to delete bug?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+          // @ts-ignore
+          Swal.fire(
+            'Closed!',
+            'Your bug has been deleted.',
+            'success'
+          )
+          try {
+            let res = api.delete("bugs/" + payload.bugId, payload.creatorEmail);
+            dispatch("getBugs")
+          } catch (error) {
+            console.error(error);
+          }
+        }
+        router.push({ name: "Home" })
+      })
+
+    },
     async closeBug({ commit, dispatch }, bug) {
       let result = await Swal.fire({
         title: 'Are you sure you want to close bug?',
@@ -101,6 +130,7 @@ export default new Vuex.Store({
             'success'
           )
           try {
+
             let res = api.put("bugs/" + bug.bugId, bug);
             dispatch("getBugById", bug.bugId)
             commit("setBugs", bug)

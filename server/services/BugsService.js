@@ -19,10 +19,16 @@ class BugsService {
   async create(rawData) {
     return await dbContext.Bugs.create(rawData)
   }
-  async delete(id, userEmail) {
+  async close(id, userEmail) {
     let data = await dbContext.Bugs.findOneAndUpdate({ _id: id, creatorEmail: userEmail }, { closed: true });
     if (!data) {
       throw new BadRequest("Invalid ID or you did not create this bug")
+    }
+  }
+  async delete(id, userEmail) {
+    let data = await dbContext.Bugs.findOneAndRemove({ _id: id, creatorEmail: userEmail });
+    if (!data) {
+      throw new BadRequest("Invalid ID or you do not own this bug");
     }
   }
   async edit(id, userEmail, update) {

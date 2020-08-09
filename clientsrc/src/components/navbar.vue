@@ -63,7 +63,7 @@ export default {
 <style scoped>
 #bugg {
   position: relative;
-  -webkit-animation: bugg 5s infinite;
+  -webkit-animation: bugg 15s infinite;
   -webkit-animation-timing-function: ease-in-out;
   transform: rotate(165deg);
 }
@@ -72,7 +72,7 @@ export default {
     left: -400px;
   }
   to {
-    left: 350px;
+    left: 1200px;
   }
   0% {
     transform: translate(1px, 1px) rotate(165deg);

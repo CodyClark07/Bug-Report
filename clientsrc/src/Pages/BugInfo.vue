@@ -102,7 +102,6 @@ export default {
       return this.$store.state.notes;
     },
     enableEdit() {
-      debugger;
       if (bug.closed == true) {
         this.disableEdit = false;
       }
