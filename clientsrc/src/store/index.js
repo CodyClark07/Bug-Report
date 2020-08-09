@@ -84,7 +84,7 @@ export default new Vuex.Store({
       }
     },
     async removeBug({ commit, dispatch }, payload) {
-      debugger
+
       let result = await Swal.fire({
         title: 'Are you sure you want to delete bug?',
         text: "You won't be able to revert this!",
@@ -145,7 +145,7 @@ export default new Vuex.Store({
 
     },
     async getNotes({ commit, dispatch }, bugId) {
-
+      debugger
       try {
         let res = await api.get("bugs/" + bugId + "/notes")
         commit("setNotes", res.data)
@@ -164,6 +164,7 @@ export default new Vuex.Store({
       }
     },
     async removeNote({ commit, dispatch }, payload) {
+      debugger
       let result = await Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -182,8 +183,8 @@ export default new Vuex.Store({
           )
           try {
             let res = api.delete("notes/" + payload.id)
-            // commit("setNotes", res.data)
-            dispatch("getNotes", payload.bugId)
+            commit("setNotes")
+            dispatch("getBugById", payload.bugId)
           } catch (error) {
             console.error(error);
           }
