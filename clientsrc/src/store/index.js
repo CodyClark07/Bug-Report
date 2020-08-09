@@ -18,8 +18,11 @@ export default new Vuex.Store({
     setProfile(state, profile) {
       state.profile = profile;
     },
-    setBugs(state, bug) {
-      state.bugs = bug
+    setBugs(state, bugs) {
+      state.bugs = bugs
+    },
+    setActiveBug(state, bug) {
+      state.activeBug = bug
     }
   },
   actions: {
@@ -46,11 +49,31 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async getBugById({ commit, dispatch }, bugId) {
+
+      try {
+        let res = await api.get("bugs/" + bugId)
+        commit("setActiveBug", res.data)
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async addBug({ commit, dispatch }, bug) {
       try {
         let res = await api.post("bugs", bug)
         console.log(res.data)
         dispatch("getBugs")
+        router.push({ name: "bug-info", params: { id: res.data.data.id } })
+
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async closeBug({ commit, dispatch }, bug) {
+      debugger
+      try {
+        let res = await api.put("bugs/" + bug.bugId, bug);
+        dispatch("getBugById", bug.bugId)
       } catch (error) {
         console.error(error);
       }

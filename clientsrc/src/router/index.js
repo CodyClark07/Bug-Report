@@ -23,10 +23,10 @@ const routes = [
     beforeEnter: authGuard,
   },
   {
-    path: "/bug/:id",
+    path: "/bugs/:id",
     name: "bug-info",
+    component: () => import(/* webpackChunkName: "BugInfo" */ '../Pages/BugInfo.vue'),
     beforeEnter: authGuard,
-
   },
 ];
 

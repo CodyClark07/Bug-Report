@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <button class="btn btn-outline-warning" @click="inputVisible = !inputVisible">Report Bug</button>
+    <button
+      class="btn btn-sm btn-outline-warning mt-5 mb-2"
+      @click="inputVisible = !inputVisible"
+    >Report Bug</button>
 
     <form v-if="inputVisible" @submit.prevent="addBug()">
       <div class="form-group">
@@ -36,28 +39,28 @@
       <button class="btn btn-outline-success" type="submit">Confirm</button>
     </form>
 
-    <table class="table">
+    <table id="bugTable" class="table text-center">
       <tr>
-        <th>
+        <th @click="sortTable(0)">
           <u>Title</u>
         </th>
-        <th>
+        <th @click="sortTable(1)">
           <u>Reported By</u>
         </th>
-        <th>
+        <th @click="sortTable(2)">
           <u>Status</u>
         </th>
-        <th>
+        <th @click="sortTable(3)">
           <u>Last Updated</u>
         </th>
       </tr>
-      <bug v-for="bug in bugs" :bugData="bug" :key="bug.id" />
+      <bugs v-for="bug in bugs" :bugData="bug" :key="bug.id" />
     </table>
   </div>
 </template>
 
 <script>
-import Bug from "../components/Bug";
+import Bugs from "../components/Bug";
 export default {
   name: "home",
   mounted() {
@@ -80,6 +83,50 @@ export default {
       });
       this.newBug = { title: "", description: "" };
     },
+    sortTable(n) {
+      let table,
+        rows,
+        switching,
+        i,
+        x,
+        y,
+        shouldSwitch,
+        dir,
+        switchcount = 0;
+      table = document.getElementById("bugTable");
+      switching = true;
+      dir = "asc";
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < rows.length - 1; i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          } else if ((dir = "desc")) {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          switchcount++;
+        } else {
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    },
   },
   computed: {
     bugs() {
@@ -87,7 +134,7 @@ export default {
     },
   },
   components: {
-    Bug,
+    Bugs,
   },
 };
 </script>
