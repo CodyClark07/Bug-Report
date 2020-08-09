@@ -78,7 +78,7 @@ export default new Vuex.Store({
         console.log(bugData)
 
         let res = await api.put("bugs/" + bugData.id, bugData)
-        dispatch("getBugs", bugData.id)
+        dispatch("getBugById", bugData.id)
       } catch (error) {
         console.error(error);
       }

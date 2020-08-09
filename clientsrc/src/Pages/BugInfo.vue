@@ -101,11 +101,6 @@ export default {
     notes() {
       return this.$store.state.notes;
     },
-    enableEdit() {
-      if (bug.closed == true) {
-        this.disableEdit = false;
-      }
-    },
   },
   methods: {
     closeBug() {
