@@ -138,3 +138,10 @@ export default {
   },
 };
 </script>
+
+<style >
+.bg-bug {
+  background-image: url(https://i.inews.co.uk/content/uploads/2020/07/Google-Search-AR-Insects.gif);
+  background-size: cover;
+}
+</style>

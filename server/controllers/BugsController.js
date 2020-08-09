@@ -2,6 +2,7 @@ import express from "express";
 import BaseController from "../utils/BaseController";
 import { bugsService } from "../services/BugsService";
 import auth0Provider from "@bcwdev/auth0provider";
+import { notesService } from "../services/NotesService";
 
 export class BugsController extends BaseController {
   constructor() {
@@ -32,7 +33,7 @@ export class BugsController extends BaseController {
   }
   async getBugNotes(req, res, next) {
     try {
-      return res.send(await bugsService.findById(req.params.id, req.userInfo.email))
+      return res.send(await notesService.findById(req.params.id, req.userInfo.email))
     } catch (error) {
       next(error)
     }
