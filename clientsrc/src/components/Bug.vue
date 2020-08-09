@@ -32,4 +32,9 @@ export default {
 
 
 <style scoped>
+tr:hover {
+  padding: 15px;
+  text-align: center;
+  background-color: rgba(132, 136, 132, 0.829);
+}
 </style>

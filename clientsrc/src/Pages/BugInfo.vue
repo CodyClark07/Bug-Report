@@ -5,7 +5,11 @@
     <span v-else class="text-danger">Status: closed</span>
     <hr />
     <h4 class="text-capitalize">Description: {{bug.description}}</h4>
-    <button class="btn btn-sm btn-outline-danger" @click="closeBug()">Close Bug</button>
+    <button
+      class="btn btn-sm btn-outline-danger"
+      :disabled="bug.closed == true"
+      @click="closeBug()"
+    >Close Bug</button>
     <button
       v-if="this.$auth.userInfo"
       class="btn btn-sm btn-outline-warning ml-2"
@@ -17,7 +21,7 @@
         <label for="title"></label>
         <input
           type="text"
-          class="form-control"
+          class="form-control w-25"
           id="title"
           placeholder="Enter Title Here..."
           v-model="editedBug.title"
@@ -27,7 +31,7 @@
         <label for="description"></label>
         <input
           type="text"
-          class="form-control"
+          class="form-control w-50"
           id="description"
           placeholder="Enter Description Here..."
           v-model="editedBug.description"
@@ -47,7 +51,7 @@
         <label for="comment"></label>
         <input
           type="text"
-          class="form-control"
+          class="form-control w-50"
           id="comment"
           placeholder="Enter Comment Here..."
           v-model="newNote.comment"

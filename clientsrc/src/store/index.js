@@ -87,11 +87,12 @@ export default new Vuex.Store({
       try {
         let res = await api.put("bugs/" + bug.bugId, bug);
         dispatch("getBugById", bug.bugId)
-        dispatch("getBugs")
-        router.push({ name: "Home" })
+        commit("setBugs", res.data)
+
       } catch (error) {
         console.error(error);
       }
+      router.push({ name: "Home" })
     },
     async getNotes({ commit, dispatch }, bugId) {
 
