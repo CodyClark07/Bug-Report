@@ -72,12 +72,23 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async editBug({ commit, dispatch }, bugData) {
+      try {
+        console.log(bugData)
+
+        let res = await api.put("bugs/" + bugData.id, bugData)
+        dispatch("getBugs", bugData.id)
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async closeBug({ commit, dispatch }, bug) {
 
       try {
         let res = await api.put("bugs/" + bug.bugId, bug);
         dispatch("getBugById", bug.bugId)
         dispatch("getBugs")
+        router.push({ name: "Home" })
       } catch (error) {
         console.error(error);
       }

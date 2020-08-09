@@ -1,10 +1,18 @@
 <template>
   <div class="notes">
-    <h5 class="text-capitalize">
-      <span>{{noteData.content}}</span>
+    <ul>
+      <li>
+        <h5 class="text-capitalize">
+          <span>{{this.$auth.userInfo.name}}: {{noteData.content}}</span>
 
-      <i class="fa fa-trash-o text-danger" @click="removeNote(noteData)"></i>
-    </h5>
+          <i
+            v-if="this.$auth.userInfo"
+            class="fa fa-trash-o text-danger ml-2"
+            @click="removeNote(noteData)"
+          ></i>
+        </h5>
+      </li>
+    </ul>
   </div>
 </template>
 

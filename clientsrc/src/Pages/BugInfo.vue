@@ -5,9 +5,42 @@
     <span v-else class="text-danger">Status: closed</span>
     <hr />
     <h4 class="text-capitalize">Description: {{bug.description}}</h4>
-    <button class="btn btn-sm btn-outline-danger" @click="closeBug()">close bug</button>
+    <button class="btn btn-sm btn-outline-danger" @click="closeBug()">Close Bug</button>
+    <button
+      v-if="this.$auth.userInfo"
+      class="btn btn-sm btn-outline-warning ml-2"
+      :disabled="bug.closed == true"
+      @click="editVisible = !editVisible"
+    >Edit Bug</button>
+    <form v-if="editVisible" @submit.prevent="editBug(bug.id)">
+      <div class="form-group">
+        <label for="title"></label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          placeholder="Enter Title Here..."
+          v-model="editedBug.title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description"></label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          placeholder="Enter Description Here..."
+          v-model="editedBug.description"
+        />
+      </div>
+      <button class="btn btn-sm btn-outline-success mb-2" type="submit">Submit</button>
+    </form>
     <hr />
-    <button class="btn btn-sm btn-outline-success mb-2" @click="noteVisible = !noteVisible">Add Note</button>
+    <button
+      class="btn btn-sm btn-outline-success mb-2"
+      :disabled="bug.closed == true"
+      @click="noteVisible = !noteVisible"
+    >Add Note</button>
 
     <form v-if="noteVisible" @submit.prevent="addNote()">
       <div class="form-group">
@@ -23,7 +56,9 @@
       <button class="btn btn-sm btn-outline-success mb-2" type="submit">Submit</button>
     </form>
     <br />
-    <u>NOTES:</u>
+    <h3>
+      <u>NOTES:</u>
+    </h3>
     <notes v-for="note in notes" :noteData="note" :key="note.id" />
   </div>
 </template>
@@ -39,8 +74,11 @@ export default {
   },
   data() {
     return {
+      editedBug: {},
       newNote: {},
       noteVisible: false,
+      editVisible: false,
+      disableEdit: true,
       title: "",
       description: "",
     };
@@ -51,6 +89,12 @@ export default {
     },
     notes() {
       return this.$store.state.notes;
+    },
+    enableEdit() {
+      debugger;
+      if (bug.closed == true) {
+        this.disableEdit = false;
+      }
     },
   },
   methods: {
@@ -68,6 +112,15 @@ export default {
         bugId: this.bug.id,
       });
       this.newNote.comment = "";
+    },
+    editBug(id) {
+      this.$store.dispatch("editBug", {
+        id: id,
+        title: this.editedBug.title,
+        description: this.editedBug.description,
+        creatorEmail: this.$auth.userInfo.email,
+      });
+      this.editedBug = { title: "", description: "" };
     },
   },
   components: {
