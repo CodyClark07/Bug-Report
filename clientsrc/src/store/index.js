@@ -145,7 +145,7 @@ export default new Vuex.Store({
 
     },
     async getNotes({ commit, dispatch }, bugId) {
-      debugger
+
       try {
         let res = await api.get("bugs/" + bugId + "/notes")
         commit("setNotes", res.data)
@@ -164,7 +164,7 @@ export default new Vuex.Store({
       }
     },
     async removeNote({ commit, dispatch }, payload) {
-      debugger
+
       let result = await Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
