@@ -17,6 +17,13 @@
       @click="editVisible = !editVisible"
     >Edit Bug</button>
     <form v-if="editVisible" @submit.prevent="editBug(bug.id)">
+      <img
+        v-if="editVisible"
+        id="buggy"
+        src="https://pngimg.com/uploads/bug/bug_PNG4001.png"
+        style="height:40px;width:40px"
+        class="img-fluid ml-2 mt-4"
+      />
       <div class="form-group">
         <label for="title"></label>
         <input
@@ -135,4 +142,27 @@ export default {
 
 
 <style scoped>
+#buggy {
+  position: relative;
+  -webkit-animation: buggy 5s infinite;
+  -webkit-animation-timing-function: linear;
+  transform: rotate(90deg);
+}
+@-webkit-keyframes buggy {
+  0% {
+    left: 50px;
+    transform: translate(1px, 1px) rotate(90deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(89deg);
+  }
+  25% {
+    top: 100px;
+    transform: translate(-30px, 0px) rotate(180deg);
+  }
+  35% {
+    top: 200px;
+    transform: translate(-30px, 0px) rotate(180deg);
+  }
+}
 </style>

@@ -1,6 +1,12 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <router-link class="navbar-brand" :to="{ name: 'Home' }">Bug-Report</router-link>
+    <img
+      id="bugg"
+      src="https://i.pinimg.com/originals/8d/6d/bf/8d6dbf5e345d59715f7dc043ecb23bc2.png"
+      style="height:40px;width:40px"
+      class="img-fluid ml-2 mt-4"
+    />
     <button
       class="navbar-toggler"
       type="button"
@@ -54,4 +60,52 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+#bugg {
+  position: relative;
+  -webkit-animation: bugg 5s infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  transform: rotate(165deg);
+}
+@-webkit-keyframes bugg {
+  from {
+    left: -400px;
+  }
+  to {
+    left: 350px;
+  }
+  0% {
+    transform: translate(1px, 1px) rotate(165deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-165deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(165deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(165deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(165deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-165deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(165deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-165deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(165deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(165deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-165deg);
+  }
+}
+</style>

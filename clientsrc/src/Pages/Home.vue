@@ -4,6 +4,13 @@
       class="btn btn-sm btn-outline-warning mt-5 mb-2"
       @click="inputVisible = !inputVisible"
     >Report Bug</button>
+    <img
+      v-if="inputVisible"
+      id="buggy"
+      src="https://i1.wp.com/freepngimages.com/wp-content/uploads/2017/06/stag-beetle-no-background.png?fit=769%2C913"
+      style="height:40px;width:40px"
+      class="img-fluid ml-2 mt-4"
+    />
 
     <form v-if="inputVisible" @submit.prevent="addBug()" class="mb-5">
       <div class="form-group">
@@ -143,5 +150,36 @@ export default {
 .bg-bug {
   background-image: url(https://i.inews.co.uk/content/uploads/2020/07/Google-Search-AR-Insects.gif);
   background-size: cover;
+}
+#buggy {
+  position: relative;
+  -webkit-animation: buggy 5s infinite;
+  -webkit-animation-timing-function: linear;
+  transform: rotate(90deg);
+}
+@-webkit-keyframes buggy {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  25% {
+    transform: rotate(180deg);
+    left: 200px;
+    top: 0px;
+  }
+  50% {
+    transform: rotate(270deg);
+    left: 200px;
+    top: 200px;
+  }
+  75% {
+    transform: rotate(-180deg);
+    left: 0px;
+    top: 200px;
+  }
+  100% {
+    left: 0px;
+    top: 0px;
+  }
 }
 </style>

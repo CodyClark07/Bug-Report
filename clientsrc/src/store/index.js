@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import router from "../router";
 import { api } from "./AxiosService"
+import Swal from 'sweetalert2'
 
 Vue.use(Vuex);
 
@@ -83,16 +84,35 @@ export default new Vuex.Store({
       }
     },
     async closeBug({ commit, dispatch }, bug) {
+      let result = await Swal.fire({
+        title: 'Are you sure you want to close bug?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, close it!'
+      }).then((result) => {
+        if (result.value) {
+          // @ts-ignore
+          Swal.fire(
+            'Closed!',
+            'Your bug has been closed.',
+            'success'
+          )
+          try {
+            let res = api.put("bugs/" + bug.bugId, bug);
+            dispatch("getBugById", bug.bugId)
+            commit("setBugs", bug)
 
-      try {
-        let res = await api.put("bugs/" + bug.bugId, bug);
-        dispatch("getBugById", bug.bugId)
-        commit("setBugs", res.data)
+          } catch (error) {
+            console.error(error);
+          }
+          router.push({ name: "Home" })
+        }
+      })
 
-      } catch (error) {
-        console.error(error);
-      }
-      router.push({ name: "Home" })
+
     },
     async getNotes({ commit, dispatch }, bugId) {
 
@@ -114,14 +134,32 @@ export default new Vuex.Store({
       }
     },
     async removeNote({ commit, dispatch }, payload) {
-      try {
-        let res = await api.delete("notes/" + payload.id)
-        console.log(res.data)
-        // commit("setNotes", res.data)
-        dispatch("getNotes", payload.bugId)
-      } catch (error) {
-        console.error(error);
-      }
+      let result = await Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+          // @ts-ignore
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+          try {
+            let res = api.delete("notes/" + payload.id)
+            // commit("setNotes", res.data)
+            dispatch("getNotes", payload.bugId)
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      })
+
     }
   }
 });
