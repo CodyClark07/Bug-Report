@@ -1,10 +1,10 @@
 <template>
   <div class="bug">
-    <h2>Title: {{bug.title}}</h2>
+    <h2 class="text-capitalize">Title: {{bug.title}}</h2>
     <span v-if="bug.closed==false" class="text-success">Status: open</span>
     <span v-else class="text-danger">Status: closed</span>
     <hr />
-    <h4>Description: {{bug.description}}</h4>
+    <h4 class="text-capitalize">Description: {{bug.description}}</h4>
     <button class="btn btn-sm btn-outline-danger" @click="closeBug()">close bug</button>
     <hr />
     <button class="btn btn-sm btn-outline-success" @click="noteVisible = !noteVisible">Add Note</button>

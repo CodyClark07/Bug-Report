@@ -6,6 +6,9 @@ class NotesService {
     async find(query = {}) {
         return await dbContext.Notes.find({ query })
     }
+    async getAll(id) {
+        return await dbContext.Notes.find({ bugId: id })
+    }
     async findById(id, userEmail) {
 
         let note = await dbContext.Notes.findById({ _id: id, creatorEmail: userEmail });

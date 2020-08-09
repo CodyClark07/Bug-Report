@@ -1,6 +1,6 @@
 <template>
   <tr class="Bugs" @click="openBug">
-    <td>{{bugData.title}}</td>
+    <td class="text-capitalize">{{bugData.title}}</td>
     <td>{{bugData.creator.name}}</td>
     <td v-if="bugData.closed == false" class="text-success">{{this.status}}</td>
     <td v-else class="text-danger">{{this.status}}</td>

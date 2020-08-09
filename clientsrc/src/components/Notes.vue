@@ -1,7 +1,9 @@
 <template>
   <div class="notes">
-    <h4>{{noteData.content}}</h4>
-    <button class="btn btn-sm btn-danger">x</button>
+    <h4 class="text-capitalize">
+      {{noteData.content}}
+      <i class="fa fa-trash-o text-danger" @click="removeNote(noteData.id)"></i>
+    </h4>
   </div>
 </template>
 
