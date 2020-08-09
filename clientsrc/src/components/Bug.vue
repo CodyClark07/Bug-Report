@@ -37,7 +37,6 @@ export default {
       this.$router.push({ name: "bug-info", params: { id: this.bugData.id } });
     },
     removeBug(bugData) {
-      debugger;
       this.$store.dispatch("removeBug", {
         bugId: this.bugData.id,
         creatorEmail: this.bugData.creatorEmail,
