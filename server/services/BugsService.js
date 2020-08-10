@@ -2,15 +2,15 @@ import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
 
 class BugsService {
-  async findAll(userEmail) {
-    let bugs = await dbContext.Bugs.find({ creatorEmail: userEmail }).populate(
+  async findAll(query = {}) {
+    let bugs = await dbContext.Bugs.find(query).populate(
       "creator",
       "name picture"
     );
     return bugs;
   }
   async findById(id, userEmail) {
-    let bug = await dbContext.Bugs.findById({ _id: id, creatorEmail: userEmail });
+    let bug = await dbContext.Bugs.findById({ _id: id });
     if (!bug) {
       throw new BadRequest("Invalid Id");
     }

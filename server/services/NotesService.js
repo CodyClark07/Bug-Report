@@ -11,7 +11,7 @@ class NotesService {
     }
     async findById(id, userEmail) {
 
-        let note = await dbContext.Notes.findById({ _id: id, creatorEmail: userEmail });
+        let note = await dbContext.Notes.findById({ _id: id });
         if (!note) {
             throw new BadRequest("Invalid Id");
         }
