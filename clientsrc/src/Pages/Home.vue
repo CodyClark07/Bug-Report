@@ -51,20 +51,40 @@
 
         <table id="bugTable" class="table text-center">
           <tr>
-            <th @click="sortTable(0)">
+            <th
+              @click="sortTable(0)"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Click to sort"
+            >
               <u>Title</u>
             </th>
-            <th @click="sortTable(1)">
+            <th
+              @click="sortTable(1)"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Click to sort"
+            >
               <u>Reported By</u>
             </th>
-            <th @click="sortTable(2)">
+            <th
+              @click="sortTable(2)"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Click to sort"
+            >
               <u>Status</u>
             </th>
-            <th @click="sortTable(3)">
+            <th
+              @click="sortTable(3)"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Click to sort"
+            >
               <u>Last Updated</u>
             </th>
           </tr>
-          <bugs v-for="bug in bugs" :bugData="bug" :key="bug.id" />
+          <bugs v-for="bug in bugs" :bugData="bug" :key="bug.id" :id="bug.id" />
         </table>
       </div>
     </div>
@@ -77,6 +97,9 @@ export default {
   name: "home",
   mounted() {
     this.$store.dispatch("getBugs");
+    $('[data-toggle="tooltip"]').tooltip({
+      trigger: "hover",
+    });
   },
   data() {
     return {

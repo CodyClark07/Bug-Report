@@ -1,6 +1,6 @@
 <template>
   <tr class="Bugs" @click="openBug">
-    <td class="text-capitalize">
+    <td class="text-capitalize" data-toggle="tooltip" data-placement="top" title="Click to open">
       <i
         v-if="this.$auth.userInfo.email = user.email"
         class="fa fa-trash-o text-danger ml-2"
@@ -21,6 +21,11 @@ import BugInfo from "../Pages/BugInfo";
 export default {
   name: "Bugs",
   props: ["bugData"],
+  mounted() {
+    $('[data-toggle="tooltip"]').on("click", function () {
+      $(this).tooltip("hide");
+    });
+  },
   data() {
     return {
       status: this.bugData.closed ? "Closed" : "Open",
@@ -34,6 +39,7 @@ export default {
   },
   methods: {
     openBug() {
+      $("#" + this.bugData.id).tooltip("hide");
       this.$router.push({ name: "bug-info", params: { id: this.bugData.id } });
     },
     removeBug(bugData) {
