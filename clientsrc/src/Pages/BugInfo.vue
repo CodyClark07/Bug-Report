@@ -4,9 +4,10 @@
       <div class="card-header">
         <h2 class="text-capitalize text-center">Title: {{bug.title}}</h2>
       </div>
-      <span v-if="bug.closed==false" class="text-success ml-4">Status: open</span>
-      <span v-else class="text-danger ml-4">Status: closed</span>
+      <span v-if="bug.closed==false" class="text-success ml-4">Status: Open</span>
+      <span v-else class="text-danger ml-4">Status: Closed</span>
       <h6 class="ml-4">Created: {{new Date(bug.createdAt).toLocaleString()}}</h6>
+      <h6 class="ml-4">Created By: {{this.$auth.userInfo.name}}</h6>
       <hr />
       <div class="card-body">
         <h4 class="text-capitalize">Description:</h4>

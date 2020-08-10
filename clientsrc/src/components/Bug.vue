@@ -23,7 +23,7 @@ export default {
   props: ["bugData"],
   data() {
     return {
-      status: this.bugData.closed ? "closed" : "open",
+      status: this.bugData.closed ? "Closed" : "Open",
       updatedDate: new Date(this.bugData.updatedAt).toLocaleString(),
     };
   },
