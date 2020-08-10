@@ -3,7 +3,7 @@
     <ul>
       <li>
         <h5 class="text-capitalize">
-          <span>{{this.$auth.userInfo.name}}: {{noteData.content}}</span>
+          <span>{{noteData.creatorEmail}}: {{noteData.content}}</span>
 
           <i
             v-if="this.$auth.userInfo"
