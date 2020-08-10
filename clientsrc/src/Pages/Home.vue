@@ -4,38 +4,39 @@
       class="btn btn-sm btn-outline-warning mt-5 mb-2"
       @click="inputVisible = !inputVisible"
     >Report Bug</button>
-    <img
-      v-if="inputVisible"
-      id="buggy"
-      src="https://i1.wp.com/freepngimages.com/wp-content/uploads/2017/06/stag-beetle-no-background.png?fit=769%2C913"
-      style="height:60px;width:70px"
-      class="img-fluid ml-2 mt-4"
-    />
-
-    <form v-if="inputVisible" @submit.prevent="addBug()" class="mb-5">
-      <div class="form-group">
-        <label for="title"></label>
-        <input
-          type="text"
-          class="form-control w-25"
-          id="title"
-          placeholder="Enter Title Here..."
-          v-model="newBug.title"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="description"></label>
-        <input
-          type="text"
-          class="form-control w-50"
-          id="description"
-          placeholder="Enter Description Here..."
-          v-model="newBug.description"
-          required
-        />
-      </div>
-      <!-- <div class="form-group">
+    <div class="card">
+      <img
+        v-if="inputVisible"
+        id="buggy"
+        src="https://i1.wp.com/freepngimages.com/wp-content/uploads/2017/06/stag-beetle-no-background.png?fit=769%2C913"
+        style="height:60px;width:70px"
+        class="img-fluid ml-2 mt-4"
+      />
+      <div class="card-body">
+        <form v-if="inputVisible" @submit.prevent="addBug()" class="mb-5">
+          <div class="form-group">
+            <label for="title"></label>
+            <input
+              type="text"
+              class="form-control w-25"
+              id="title"
+              placeholder="Enter Title Here..."
+              v-model="newBug.title"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="description"></label>
+            <input
+              type="text"
+              class="form-control w-50"
+              id="description"
+              placeholder="Enter Description Here..."
+              v-model="newBug.description"
+              required
+            />
+          </div>
+          <!-- <div class="form-group">
         <label for="name"></label>
         <input
           type="text"
@@ -44,27 +45,29 @@
           placeholder="Enter Name Here..."
           v-model="newBug.name"
         />
-      </div>-->
-      <button class="btn btn-outline-success" type="submit">Confirm</button>
-    </form>
+          </div>-->
+          <button class="btn btn-outline-success" type="submit">Confirm</button>
+        </form>
 
-    <table id="bugTable" class="table text-center">
-      <tr>
-        <th @click="sortTable(0)">
-          <u>Title</u>
-        </th>
-        <th @click="sortTable(1)">
-          <u>Reported By</u>
-        </th>
-        <th @click="sortTable(2)">
-          <u>Status</u>
-        </th>
-        <th @click="sortTable(3)">
-          <u>Last Updated</u>
-        </th>
-      </tr>
-      <bugs v-for="bug in bugs" :bugData="bug" :key="bug.id" />
-    </table>
+        <table id="bugTable" class="table text-center">
+          <tr>
+            <th @click="sortTable(0)">
+              <u>Title</u>
+            </th>
+            <th @click="sortTable(1)">
+              <u>Reported By</u>
+            </th>
+            <th @click="sortTable(2)">
+              <u>Status</u>
+            </th>
+            <th @click="sortTable(3)">
+              <u>Last Updated</u>
+            </th>
+          </tr>
+          <bugs v-for="bug in bugs" :bugData="bug" :key="bug.id" />
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -147,10 +150,6 @@ export default {
 </script>
 
 <style >
-.bg-bug {
-  background-image: url(https://i.inews.co.uk/content/uploads/2020/07/Google-Search-AR-Insects.gif);
-  background-size: cover;
-}
 #buggy {
   position: relative;
   -webkit-animation: buggy 5s infinite;

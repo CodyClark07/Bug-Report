@@ -1,5 +1,5 @@
 <template>
-  <div class="notes shadow-lg border overflow-auto">
+  <div class="notes shadow-lg border">
     <ul>
       <li>
         <h5 class="text-capitalize">
