@@ -27,6 +27,7 @@ export default {
   computed: {},
   methods: {
     removeNote(noteData) {
+      debugger;
       this.$store.dispatch("removeNote", {
         id: this.noteData.id,
         bugId: this.noteData.bugId,
