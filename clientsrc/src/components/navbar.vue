@@ -87,13 +87,13 @@ export default {
     transform: translate(3px, 2px) rotate(165deg);
   }
   40% {
-    transform: translate(1px, -1px) rotate(165deg);
+    transform: translate(1px, -1px) rotate(275deg);
   }
   50% {
     transform: translate(-1px, 2px) rotate(-165deg);
   }
   60% {
-    transform: translate(-3px, 1px) rotate(165deg);
+    transform: translate(-3px, 1px) rotate(90deg);
   }
   70% {
     transform: translate(3px, 1px) rotate(-165deg);
