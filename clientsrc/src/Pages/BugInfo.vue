@@ -155,21 +155,4 @@ export default {
   -webkit-animation-timing-function: linear;
   transform: rotate(90deg);
 }
-@-webkit-keyframes buggy {
-  0% {
-    left: 50px;
-    transform: translate(1px, 1px) rotate(90deg);
-  }
-  10% {
-    transform: translate(-1px, -2px) rotate(89deg);
-  }
-  25% {
-    top: 100px;
-    transform: translate(-30px, 0px) rotate(180deg);
-  }
-  35% {
-    top: 200px;
-    transform: translate(-30px, 0px) rotate(180deg);
-  }
-}
 </style>
