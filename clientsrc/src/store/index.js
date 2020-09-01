@@ -165,7 +165,6 @@ export default new Vuex.Store({
       }
     },
     async removeNote({ commit, dispatch }, payload) {
-      debugger
       let result = await Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -183,7 +182,7 @@ export default new Vuex.Store({
             'success'
           )
           try {
-            debugger
+
             let res = api.delete("notes/" + payload.id)
             dispatch("getBugById", payload.bugId)
           } catch (error) {
