@@ -3,13 +3,16 @@
     <button
       class="btn btn-sm btn-outline-warning mt-5 mb-2"
       @click="inputVisible = !inputVisible"
-    >Report Bug</button>
+      :disabled="!$auth.isAuthenticated"
+    >
+      Report Bug
+    </button>
     <div class="card">
       <img
         v-if="inputVisible"
         id="buggy"
         src="https://i1.wp.com/freepngimages.com/wp-content/uploads/2017/06/stag-beetle-no-background.png?fit=769%2C913"
-        style="height:60px;width:70px"
+        style="height: 60px; width: 70px"
         class="img-fluid ml-2 mt-4"
       />
       <div class="card-body">
